@@ -23,7 +23,7 @@ class LDAPConnection {
      * @param string $ldapPass Mot de passe LDAP
      * @return bool Résultat de la liaison
      */
-    public function bind($ldapUser, $ldapPass) {
+    public function bind($ldapUser, $ldapPass): bool {
         return ldap_bind($this->ldapConn, $ldapUser, $ldapPass);
     }
 
@@ -35,7 +35,7 @@ class LDAPConnection {
      * @param array $attributes Attributs à retourner
      * @return array Résultat de la recherche
      */
-    public function search($baseDN, $filter, $attributes = []) {
+    public function search($baseDN, $filter, $attributes = []): array|false {
         $result = ldap_search($this->ldapConn, $baseDN, $filter, $attributes);
         return ldap_get_entries($this->ldapConn, $result);
     }
