@@ -12,15 +12,11 @@
         </p>
         <?php endif; ?>
 
-        <form method="POST" action="ldap_login.php" class="row g-3">
+        <form method="POST" action="./Controller/ldap_login.php" class="row g-3">
             <p>
-                Serveur : <?= __LDPA_SERVER__; ?>
-            </p>
-            <p>
-                Port : <?= __LDPA_PORT__; ?>
-            </p>
-            <p>
-                Domain : <?= __LDPA_DOMAIN__; ?>
+                Serveur : <?= __LDPA_SERVER__ ?><br>
+                Port : <?= __LDPA_PORT__ ?><br>
+                Domaine : <?= __LDPA_DOMAIN__ ?>
             </p>
 
             <div class="col-md-6">
