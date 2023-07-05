@@ -1,4 +1,0 @@
-<?php
-define('__LDPA_SERVER__', ''); // string
-define('__LDPA_PORT__', ); // int
-define('__LDPA_DOMAIN__', ''); // string

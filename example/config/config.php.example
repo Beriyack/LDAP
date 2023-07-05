@@ -1,0 +1,4 @@
+<?php
+define('__LDAP_SERVER__', '127.0.0.1');
+define('__LDAP_PORT__', 389);
+define('__LDAP_DOMAIN__', 'example.com');

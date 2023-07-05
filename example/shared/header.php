@@ -1,5 +1,5 @@
 <?php
-    require_once './config.php';
+    require_once './config/config.php';
     session_start();
 ?>
 <!DOCTYPE html>
@@ -23,6 +23,20 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="index.php">Accueil</a>
                         </li>
+                        <?php
+                            if (isset($_SESSION['auth'])) {
+                        ?>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Bénéficiaire
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="add_ben.php">Ajouter</a></li>
+                            </ul>
+                        </li>
+                        <?php
+                            }
+                        ?>
                     </ul>
                     <ul class="navbar-nav mb-2 mb-lg-0 d-flex">
                         <?php

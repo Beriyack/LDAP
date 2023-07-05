@@ -6,18 +6,21 @@
     $title = 'Connexion';
     require_once './shared/header.php';
 ?>
-        <?php if (isset($_GET['err'])) : ?>
+        <h3><?= $title; ?></h3>
         <p>
-            <?= $_GET['err'] ?>
+            Serveur : <?= __LDAP_SERVER__ ?><br>
+            Port : <?= __LDAP_PORT__ ?><br>
+            Domaine : <?= __LDAP_DOMAIN__ ?>
         </p>
-        <?php endif; ?>
-
-        <form method="POST" action="./Controller/ldap_login.php" class="row g-3">
-            <p>
-                Serveur : <?= __LDPA_SERVER__ ?><br>
-                Port : <?= __LDPA_PORT__ ?><br>
-                Domaine : <?= __LDPA_DOMAIN__ ?>
-            </p>
+        <form method="POST" action="./Controller/AuthController.php" class="row g-3">
+            <?php if (isset($_GET['err'])) : ?>
+                <div class="alert alert-danger alert-dismissible fade show"  role="alert">
+                    <div>
+                        <?= $_GET['err'] ?>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
 
             <div class="col-md-6">
                 <label for="username" class="form-label">Nom d'utilisateur</label>

@@ -36,7 +36,8 @@ class LDAPConnection {
      * @return array Résultat de la recherche
      */
     public function search($baseDN, $filter, $attributes = []): array|false {
-        $result = ldap_search($this->ldapConn, $baseDN, $filter, $attributes);
+        $result = ldap_search($this->ldapConn, $baseDN, "(|(sn=brouillard*)(givenname=brouillard*))", $attributes);
+        var_dump($result);
         return ldap_get_entries($this->ldapConn, $result);
     }
 
