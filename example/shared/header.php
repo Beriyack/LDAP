@@ -1,64 +1,28 @@
-<?php
-    require_once './config/config.php';
-    session_start();
-?>
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><?= $title ?: 'Accueil' ?> - LDAP</title>
+<?php 
+    require_once __DIR__ . '/../config/config.php';
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.php">LDAP</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarLDAP" aria-controls="navbarLDAP" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarLDAP">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.php">Accueil</a>
-                        </li>
-                        <?php
-                            if (isset($_SESSION['auth'])) {
-                        ?>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Bénéficiaire
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="add_ben.php">Ajouter</a></li>
-                            </ul>
-                        </li>
-                        <?php
-                            }
-                        ?>
-                    </ul>
-                    <ul class="navbar-nav mb-2 mb-lg-0 d-flex">
-                        <?php
-                            if (isset($_SESSION['auth'])) {
-                        ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="profile.php">Profile</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="logout.php">Se déconnecter</a>
-                            </li>
-                        <?php
-                            } else {
-                        ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="login.php">Se connecter</a>
-                            </li>
-                        <?php
-                            }
-                        ?>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <main class="container-fluid mt-4">
+    $ping = fsockopen(__LDAP_DOMAIN__, 80, $error_code, $error_message, 10);
+    fclose($ping);
+?>
+<header>
+    <nav>
+        <ul>
+            <li><a href="index.php">Accueil</a></li>
+            <li><a href="search.php">Recherche</a></li>
+            <?php if (isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
+                <li><a href="logout.php">Se déconnecter</a></li>
+            <?php else: ?>
+                <li><a href="login.php">Se connecter</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h3>Configuration</h3>
+    <p>
+        Serveur : <?= __LDAP_SERVER__ ?><br>
+        Port : <?= __LDAP_PORT__ ?><br>
+        Domaine : <?= __LDAP_DOMAIN__ ?><br>
+        Ping : <?= $ping ? "En ligne" : "Hors ligne"; ?><br>
+        Extension LDAP : <?= extension_loaded('ldap') ? 'Activé' : 'Désactivé'; ?>
+    </p>

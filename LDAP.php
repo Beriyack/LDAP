@@ -1,9 +1,9 @@
 <?php
-class LDAPConnection {
+class LDAP {
     private $ldapConn;
 
     /**
-     * Constructeur de la classe LDAPConnection.
+     * Constructeur de la classe LDAP.
      *
      * @param string $ldapServer Adresse du serveur LDAP
      * @param int $ldapPort Port du serveur LDAP
@@ -36,8 +36,7 @@ class LDAPConnection {
      * @return array Résultat de la recherche
      */
     public function search($baseDN, $filter, $attributes = []): array|false {
-        $result = ldap_search($this->ldapConn, $baseDN, "(|(sn=brouillard*)(givenname=brouillard*))", $attributes);
-        var_dump($result);
+        $result = ldap_search($this->ldapConn, $baseDN, $filter, $attributes);
         return ldap_get_entries($this->ldapConn, $result);
     }
 

@@ -1,23 +1,22 @@
 <?php
-    $title = 'Accueil';
-    require_once './shared/header.php';
-
-    $ping = fsockopen(__LDAP_DOMAIN__, 80, $error_code, $error_message, 10);
-    fclose($ping);
+    session_start();
+    session_destroy();
 ?>
-    <h1>Bienvenue sur un exemple d'utilisation de la classe LDAP</h1>
-    <h3>Fichier de configuration</h3>
-    <p>
-        Serveur : <?= __LDAP_SERVER__ ?><br>
-        Port : <?= __LDAP_PORT__ ?><br>
-        Domaine : <?= __LDAP_DOMAIN__ ?><br>
-        Ping : <?= $ping ? "En ligne" : "Hors ligne"; ?>
-    </p>
-    <p>
-        Version PHP : <?= phpversion(); ?><br>
-        Extension LDAP : <?= extension_loaded('ldap') ? 'Activé' : 'Désactivé'; ?>
-    </p>
-    <p>
-        <?php var_dump($_SESSION); ?>
-    </p>
-<?php require_once './shared/footer.php'; ?>
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Accueil - Exemple LDAP</title>
+    </head>
+    <body>
+        <?php require_once __DIR__ . '/shared/header.php'; ?>
+            <h1>Accueil</h1>
+            <?php if (isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
+                <p>Vous êtes connecté</p>
+            <?php else: ?>
+                <p>Vous êtes déconnecté</p>
+            <?php endif; ?>
+        <?php require_once __DIR__ . '/shared/footer.php'; ?>
+    </body>
+</html>
