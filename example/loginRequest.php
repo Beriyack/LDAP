@@ -20,12 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $_SESSION['err']['actif'] = true;
             $_SESSION['err']['message'] = 'Vérifiez les informations envoyés.';
-            $_SESSION['auth'] = false;
             $location = 'login.php';
         }
 
         $ldap->close();
     }
 }
-
-header('Location: ' . $location);
+header('Location: '. $location);

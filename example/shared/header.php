@@ -8,8 +8,8 @@
     <nav>
         <ul>
             <li><a href="index.php">Accueil</a></li>
-            <li><a href="search.php">Recherche</a></li>
             <?php if (isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
+                <li><a href="search.php">Recherche</a></li>
                 <li><a href="logout.php">Se déconnecter</a></li>
             <?php else: ?>
                 <li><a href="login.php">Se connecter</a></li>
@@ -18,7 +18,7 @@
     </nav>
 </header>
 <main>
-    <h3>Configuration</h3>
+    <h1>Configuration</h1>
     <p>
         Serveur : <?= __LDAP_SERVER__ ?><br>
         Port : <?= __LDAP_PORT__ ?><br>

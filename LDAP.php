@@ -37,6 +37,7 @@ class LDAP {
      */
     public function search($baseDN, $filter, $attributes = []): array|false {
         $result = ldap_search($this->ldapConn, $baseDN, $filter, $attributes);
+        var_dump($result);
         return ldap_get_entries($this->ldapConn, $result);
     }
 
@@ -47,10 +48,10 @@ class LDAP {
      * @param array $attributes Attributs à retourner
      * @return array Résultat de la lecture de l'entrée
      */
-    public function getEntry($dn, $attributes = []) {
-        $result = ldap_read($this->ldapConn, $dn, "(objectClass=*)", $attributes);
-        return ldap_get_entries($this->ldapConn, $result);
-    }
+    // public function getEntry($dn, $attributes = []) {
+    //     $result = ldap_read($this->ldapConn, $dn, "(objectClass=*)", $attributes);
+    //     return ldap_get_entries($this->ldapConn, $result);
+    // }
 
     /**
      * Ajoute une nouvelle entrée à l'annuaire LDAP.
