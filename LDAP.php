@@ -37,7 +37,6 @@ class LDAP {
      */
     public function search($baseDN, $filter, $attributes = []): array|false {
         $result = ldap_search($this->ldapConn, $baseDN, $filter, $attributes);
-        var_dump($result);
         return ldap_get_entries($this->ldapConn, $result);
     }
 

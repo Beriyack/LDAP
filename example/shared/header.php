@@ -1,5 +1,5 @@
 <?php 
-    require_once __DIR__ . '/../config/config.php';
+    require_once __DIR__ . '/../config/app.php';
 
     $ping = fsockopen(__LDAP_DOMAIN__, 80, $error_code, $error_message, 10);
     fclose($ping);
